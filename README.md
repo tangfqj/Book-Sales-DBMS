@@ -11,22 +11,22 @@ This is a book sales managment system using Django and PostgreSQL. It is not onl
 |--BookApp
    |-- .idea
    |-- BookApp
-       |-- __init__.py
-	   |-- asgi.py
-	   |-- settings.py
-	   |-- urls.py
-	   |-- wsgi.py
+   |    |-- __init__.py
+   |    |-- asgi.py
+   |    |-- settings.py
+   |    |-- urls.py
+   |    |-- wsgi.py
    |-- BookDBMS
-       |-- migrations
-	   |-- __init__.py
-	   |-- admin.py
-	   |-- apps.py
-	   |-- forms.py
-	   |-- models.py
-	   |-- tests.py
-	   |-- views.py
+   |    |-- migrations
+   |	|-- __init__.py
+   |	|-- admin.py
+   |	|-- apps.py
+   |	|-- forms.py
+   |	|-- models.py
+   |	|-- tests.py
+   |	|-- views.py
    |-- static
-   	   |-- user.png
+   |    |-- user.png
    |-- templates
    |-- venv
    |-- manage.py
