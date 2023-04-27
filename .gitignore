@@ -1,4 +1,5 @@
 
 *.un~
+!/.idea
 !/BookApp/.idea/
 !/BookApp/venv/

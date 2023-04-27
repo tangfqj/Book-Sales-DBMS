@@ -5,79 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="80d632a8-0a1c-4d4d-b1d7-15207f04b3a3" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/BookApp/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BookApp/.idea/BookApp.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BookApp/.idea/dataSources.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BookApp/.idea/deployment.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BookApp/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BookApp/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BookApp/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BookApp/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BookApp/BookApp/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BookApp/BookApp/asgi.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BookApp/BookApp/settings.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BookApp/BookApp/urls.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BookApp/BookApp/wsgi.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BookApp/BookDBMS/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BookApp/BookDBMS/admin.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BookApp/BookDBMS/apps.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BookApp/BookDBMS/forms.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BookApp/BookDBMS/migrations/0001_initial.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BookApp/BookDBMS/migrations/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BookApp/BookDBMS/models.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BookApp/BookDBMS/tests.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BookApp/BookDBMS/views.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BookApp/manage.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BookApp/static/user.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BookApp/templates/admin_login.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BookApp/templates/base.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BookApp/templates/check_unpaid.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BookApp/templates/check_unreturned.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BookApp/templates/edit_book.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BookApp/templates/index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BookApp/templates/inventory.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BookApp/templates/payment.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BookApp/templates/purchase.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BookApp/templates/purchase_fail.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BookApp/templates/purchase_success.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BookApp/templates/stock.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BookApp/templates/stock_complete.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BookApp/templates/stock_partial.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BookApp/templates/test.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/Book-Sales-DBMS.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Book-Sales-DBMS.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Book_Sales_App/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Book_Sales_App/.idea/Book_Sales_App.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Book_Sales_App/.idea/aws.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Book_Sales_App/.idea/dataSources.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Book_Sales_App/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Book_Sales_App/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Book_Sales_App/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Book_Sales_App/.idea/sqldialects.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Book_Sales_App/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Book_Sales_App/Book_DBMS/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Book_Sales_App/Book_DBMS/admin.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Book_Sales_App/Book_DBMS/apps.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Book_Sales_App/Book_DBMS/forms.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Book_Sales_App/Book_DBMS/migrations/0001_initial.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Book_Sales_App/Book_DBMS/migrations/0002_delete_bill_book_purchase_ref_book_id_and_more.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Book_Sales_App/Book_DBMS/migrations/0003_remove_book_stock_book_book_stock_author_and_more.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Book_Sales_App/Book_DBMS/migrations/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Book_Sales_App/Book_DBMS/models.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Book_Sales_App/Book_DBMS/tests.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Book_Sales_App/Book_DBMS/urls.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Book_Sales_App/Book_DBMS/views.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Book_Sales_App/Book_Sales_App/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Book_Sales_App/Book_Sales_App/asgi.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Book_Sales_App/Book_Sales_App/settings.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Book_Sales_App/Book_Sales_App/urls.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Book_Sales_App/Book_Sales_App/wsgi.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Book_Sales_App/manage.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Book_Sales_App/templates/admin_login.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Book_Sales_App/templates/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Book_Sales_App/templates/inventory.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Book_Sales_App/templates/stock.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Book_Sales_App/templates/stock/stock.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -121,6 +49,7 @@
       <workItem from="1682578160857" duration="620000" />
       <workItem from="1682578800472" duration="46000" />
       <workItem from="1682603386575" duration="51000" />
+      <workItem from="1682603737505" duration="51000" />
     </task>
     <servers />
   </component>
