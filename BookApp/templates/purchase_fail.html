@@ -1,0 +1,12 @@
+
+
+{% block content %}
+  <h1>Sorry, the purchase encounters some problem...</h1>
+  {% if reason == 'Book not found' %}
+    <p>The book you searched for could not be found.</p>
+  {% else %}
+    <p>Sorry, there is not enough inventory for this book.</p>
+    <p>The current inventory is {{ inventory }}.</p>
+  {% endif %}
+  <p><a href="{% url 'purchase' %}">Back to Purchase Page</a></p>
+{% endblock %}

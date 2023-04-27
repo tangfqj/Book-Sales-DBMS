@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% block content %}
+<style>
+input[type="text"],
+input[type="number"] {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 16px;
+  margin-bottom: 10px;
+  width: 50%;
+  box-sizing: content-box;
+}
+
+input[type="submit"] {
+  background-color: #4CAF50;
+  color: #fff;
+  padding: 10px 20px;
+  font-size: 18px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+input[type="submit"]:hover {
+  background-color: #3e8e41;
+}
+</style>
+<h1>Finish payment and set its sales price</h1>
+    <h4>Title: {{ book_stock.book.title }}</h4>
+    <h4>Stock Price: {{ book_stock.stock_price }}</h4>
+    <h4>Stock Number: {{ book_stock.stock_number }}</h4>
+    <p>Enter the sales price for this book:</p>
+    <form method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <input type="submit" value="Pay" id="pay" onclick="alert('Paid Successfully')">
+    </form>
+{% endblock %}
+
+
+
+
+

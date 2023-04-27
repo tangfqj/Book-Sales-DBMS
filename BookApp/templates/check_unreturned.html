@@ -1,0 +1,231 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Book Sales Management System</title>
+    <style>
+      header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px;
+        background-color: #fff;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+      }
+
+      header h1 {
+        margin-left: 250px;
+        font-size: 32px;
+        font-weight: bold;
+        color: #555;
+      }
+
+      header .user-profile {
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+      }
+
+      header .user-profile img {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        margin-right: 10px;
+      }
+
+      header .user-profile span {
+        font-size: 18px;
+        font-weight: bold;
+        color: #555;
+      }
+
+
+      .navigation {
+          position: fixed;
+          top: 0;
+          left: 0;
+          height: 100%;
+          width: 180px;
+          background-color: #f5f5f5;
+          padding: 20px;
+      }
+
+      .navigation ul {
+          list-style: none;
+          margin-top: 30px;
+          padding: 0;
+      }
+
+      .navigation ul li a {
+          display: block;
+          padding: 10px;
+          color: #333;
+          text-decoration: none;
+      }
+
+      .navigation ul li a:hover {
+          background-color: #ddd;
+      }
+
+      #search-form {
+        margin-bottom: 20px;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+      }
+
+      #search-form input[type="text"] {
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 16px;
+        margin-right: 10px;
+      }
+
+      #search-form button[type="submit"] {
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 16px;
+        background-color: #A9A9A9;
+        color: #fff;
+        cursor: pointer;
+      }
+
+
+      #main {
+        margin: 30px 0 0 230px;
+        padding: 20px;
+      }
+
+      #main h2 {
+        font-size: 24px;
+        font-weight: bold;
+        margin-top: 0;
+        margin-bottom: 20px;
+      }
+
+      table {
+        border-collapse: collapse;
+        width: 100%;
+        margin-bottom: 20px;
+      }
+
+      th,
+      td {
+        padding: 12px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+      }
+
+      th {
+        background-color: #f2f2f2;
+        font-weight: bold;
+        color: #555;
+      }
+
+      .pagination {
+          margin-top: 20px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          font-size: 18px;
+        }
+
+      .pagination a {
+          display: inline-block;
+          padding: 10px;
+          border-radius: 5px;
+          color: #555;
+          background-color: #fff;
+          border: 1px solid #ccc;
+          margin: 0 5px;
+          text-decoration: none;
+          transition: background-color 0.3s ease;
+      }
+
+      .pagination a:hover {
+          background-color: #eee;
+      }
+
+      .current-page {
+          font-weight: bold;
+          margin: 0 10px;
+      }
+
+      #ret {
+          display: inline-block;
+          padding: 5px;
+          border-radius: 5px;
+          color: #fff;
+          background-color: #1E90FF;
+          border: none;
+          margin: 0 5px;
+          text-decoration: none;
+          transition: background-color 0.3s ease;
+        }
+
+        #ret:hover {
+          background-color: #0069d9;
+        }
+
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Book Sales Management System</h1>
+      <div class="user-profile">
+        <img src="{% static 'user.png' %}" alt="User Profile">
+        <span>John Doe</span>
+      </div>
+    </header>
+    <div class="navigation">
+      <ul>
+        <li><a href="inventory.html">Inventory</a></li>
+        <li><a href="stock.html">Stock</a></li>
+        <li><a href="check_unpaid.html">Payment</a></li>
+        <li><a href="#portfolio">Purchase</a></li>
+        <li><a href="check_unreturned.html">Return</a></li>
+        <li><a href="#contact">Bill</a></li>
+      </ul>
+    </div>
+
+    <main id="main">
+      {% block content %}
+        <h2>Unpaid Books</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Author</th>
+                    <th>Publisher</th>
+                    <th>Current Inventory</th>
+                    <th>Number of Stock</th>
+                    <th>Price</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for stock in toreturn_books %}
+                    <tr>
+                        <td>{{ stock.book.title }}</td>
+                        <td>{{ stock.book.author }}</td>
+                        <td>{{ stock.book.publisher }}</td>
+                        <td>{{ stock.book.inventory }}</td>
+                        <td>{{ stock.stock_number }}</td>
+                        <td>{{ stock.stock_price }}</td>
+                        <td>
+                            <form action="{% url 'return_book' stock.pk %}" method="post">
+                                {% csrf_token %}
+                                <input type="submit" value="Return" id="ret" onclick="alert('Returned Successfully')">
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+      {% endblock %}
+
+    </main>
+  </body>
+</html>
