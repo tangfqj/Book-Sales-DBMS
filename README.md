@@ -1,11 +1,12 @@
 # Book-Sales-DBMS
 
 ## Description
-This is a book sales managment system using Django and PostgreSQL. It is not only the assignment for my Database course, but the first application with fullstack backend and frontend completed by myself.
+This is a book sales management system using Django and PostgresSQL. It is not only the assignment for my Database course, but the first application with fullstack backend and frontend completed by myself.
 
 ## Installation
+Open the project in ```BookApp``` directory.
 
-## File Structure
+## Project File Structure
 ```
 .
 |--BookApp
