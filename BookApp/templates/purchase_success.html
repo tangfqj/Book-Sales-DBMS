@@ -1,19 +1,23 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <h1>Confirm your purchase</h1>
-  <p><strong>Book ID:</strong> {{ book.book_id }}</p>
-  <p><strong>Title:</strong> {{ book.title }}</p>
-  <p><strong>Author:</strong> {{ book.author }}</p>
-  <p><strong>Publisher:</strong> {{ book.publisher }}</p>
-  <p><strong>ISBN:</strong> {{ book.isbn }}</p>
-  <p><strong>Number of Purchase:</strong> {{ quantity }}</p>
-  <p><strong>Total Price:</strong> {{ total_price }}</p>
-  <form method="POST" action="{% url 'purchase_success' %}">
-    {% csrf_token %}
-    <input type="hidden" name="book_id" value="{{ book.book_id }}">
-    <input type="hidden" name="quantity" value="{{ quantity }}">
-    <input type="hidden" name="total_price" value="{{ total_price }}">
-    <input type="submit" value="Confirm">
-  </form>
+    <style>
+
+    </style>
+
+    <h2>Confirm your purchase</h2>
+    <p><strong>Book ID:</strong> {{ book.book_id }}</p>
+    <p><strong>Title:</strong> {{ book.title }}</p>
+    <p><strong>Author:</strong> {{ book.author }}</p>
+    <p><strong>Publisher:</strong> {{ book.publisher }}</p>
+    <p><strong>ISBN:</strong> {{ book.isbn }}</p>
+    <p><strong>Number of Purchase:</strong> {{ quantity }}</p>
+    <p><strong>Total Price:</strong> {{ total_price }}</p>
+    <form method="POST" action="{% url 'purchase_success' %}">
+        {% csrf_token %}
+        <input type="hidden" name="book_id" value="{{ book.book_id }}">
+        <input type="hidden" name="quantity" value="{{ quantity }}">
+        <input type="hidden" name="total_price" value="{{ total_price }}">
+        <input type="submit" value="Confirm">
+    </form>
 {% endblock %}
