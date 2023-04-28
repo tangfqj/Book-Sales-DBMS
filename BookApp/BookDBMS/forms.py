@@ -38,11 +38,6 @@ class CommonAdminLoginForm(forms.Form):
     password = forms.CharField(widget=forms.PasswordInput)
 
 
-class LoginForm(AuthenticationForm):
-    username = forms.CharField(label='Username', widget=forms.TextInput(attrs={'autofocus': True, 'class': 'form-control'}))
-    password = forms.CharField(label='Password', widget=forms.PasswordInput(attrs={'class': 'form-control'}))
-
-
 class CommonAdminUpdateForm(forms.ModelForm):
     class Meta:
         model = User

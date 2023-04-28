@@ -1,7 +1,7 @@
 import datetime
 
 from django.contrib import messages
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import forms, authenticate, login, logout
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.core.exceptions import PermissionDenied
 from django.core.paginator import Paginator
@@ -10,7 +10,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
 from django.views.decorators.csrf import csrf_exempt
 
-from .forms import BookForm, SalesPriceForm, LoginForm, CommonAdminForm
+from .forms import BookForm, SalesPriceForm, CommonAdminForm
 from .models import CommonAdmin, Book, Stock, Sale
 
 # Create your views here.
@@ -20,29 +20,22 @@ from .models import CommonAdmin, Book, Stock, Sale
 def index(request):
     return render(request, "index.html")
 
-
+@csrf_exempt
 def login_view(request):
     if request.method == 'POST':
-        form = LoginForm(request.POST)
-        if form.is_valid():
-            user = authenticate(request, username=form.cleaned_data['username'], password=form.cleaned_data['password'])
-            if user is not None:
-                if user.is_active:
-                    login(request, user)
-                    next_url = request.GET.get('next')
-                    if next_url:
-                        return redirect(next_url)
-                    else:
-                        return redirect('home')
-                else:
-                    messages.error(request, 'Your account is not active.')
-            else:
-                messages.error(request, 'Invalid username or password.')
-    else:
-        form = LoginForm()
-
-    return render(request, 'login.html', {'form': form})
-
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        user = authenticate(username=username, password=password)
+        print("success auth")
+        print(user.username)
+        print(user.password)
+        if user is not None:
+            login(request, user)
+            print("login")
+            return redirect('inventory.html')
+        else:
+            messages.error(request, 'Invalid username or password.')
+    return render(request, "login.html")
 
 @login_required
 def logout_view(request):

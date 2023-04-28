@@ -1,0 +1,26 @@
+{% block content %}
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-header">{{ title }}</div>
+        <div class="card-body">
+          {% if message %}
+          <div class="alert alert-danger" role="alert">{{ message }}</div>
+          {% endif %}
+          <form method="post" action="{% url 'login_view' %}">
+            {% csrf_token %}
+            <label>Username:</label>
+            <input name="username">
+            <div></div>
+            <label>Password:</label>
+            <input name="password">
+            <div></div>
+            <button type="submit" class="btn btn-primary">Login</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
