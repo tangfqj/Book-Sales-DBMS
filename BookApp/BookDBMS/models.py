@@ -1,5 +1,7 @@
 from django.db import models
-from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import AbstractUser, Group, Permission
+from django.utils.translation import gettext as _
+
 # Create your models here.
 
 
@@ -11,6 +13,24 @@ class User(AbstractUser):
     mobile_phone = models.CharField(max_length=20)
 
     USERNAME_FIELD = 'username'
+
+    user_permissions = models.ManyToManyField(
+        Permission,
+        verbose_name=_('user permissions'),
+        blank=True,
+        related_name='auth_user_permissions_bookdbms'
+    )
+
+    groups = models.ManyToManyField(
+        Group,
+        verbose_name=_('groups'),
+        blank=True,
+        help_text=_(
+            'The groups this user belongs to. A user will get all permissions '
+            'granted to each of their groups.'
+        ),
+        related_name='auth_user_set_bookdbms'
+    )
 
 
 class SuperAdminManager(models.Manager):

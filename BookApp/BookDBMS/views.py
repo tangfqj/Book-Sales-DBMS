@@ -1,21 +1,94 @@
 import datetime
-from django.contrib.auth.decorators import login_required
+
+from django.contrib import messages
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required, user_passes_test
+from django.core.exceptions import PermissionDenied
 from django.core.paginator import Paginator
 from django.db.models import Q
-from django.views.decorators.csrf import csrf_protect, csrf_exempt
 from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib import messages
-from django.contrib.auth import login
 from django.urls import reverse
-from django.http import HttpResponse
-from .models import Book, Stock, Sale
-from .forms import BookForm, SalesPriceForm
+from django.views.decorators.csrf import csrf_exempt
+
+from .forms import BookForm, SalesPriceForm, LoginForm, CommonAdminForm
+from .models import CommonAdmin, Book, Stock, Sale
+
 # Create your views here.
 
 
 # view for the main page
 def index(request):
     return render(request, "index.html")
+
+
+def login_view(request):
+    if request.method == 'POST':
+        form = LoginForm(request.POST)
+        if form.is_valid():
+            user = authenticate(request, username=form.cleaned_data['username'], password=form.cleaned_data['password'])
+            if user is not None:
+                if user.is_active:
+                    login(request, user)
+                    next_url = request.GET.get('next')
+                    if next_url:
+                        return redirect(next_url)
+                    else:
+                        return redirect('home')
+                else:
+                    messages.error(request, 'Your account is not active.')
+            else:
+                messages.error(request, 'Invalid username or password.')
+    else:
+        form = LoginForm()
+
+    return render(request, 'login.html', {'form': form})
+
+
+@login_required
+def logout_view(request):
+    logout(request)
+    return redirect('login')
+
+
+def is_superadmin(user):
+    return user.is_authenticated and user.is_superuser
+
+
+@user_passes_test(is_superadmin)
+def create_common_admin(request):
+    if request.method == 'POST':
+        form = CommonAdminForm(request.POST)
+        if form.is_valid():
+            user = form.save(commit=False)
+            user.set_password(form.cleaned_data['password'])
+            user.save()
+            messages.success(request, 'Common administrator account has been created successfully.')
+            return redirect('view_common_admin', pk=user.pk)
+    else:
+        form = CommonAdminForm()
+
+    return render(request, 'create_common_admin.html', {'form': form})
+
+
+@login_required
+def view_common_admin(request, pk):
+    common_admin = CommonAdmin.objects.filter(pk=pk).first()
+    if common_admin is None:
+        messages.error(request, 'Common administrator not found.')
+        return redirect('home')
+    if request.user.is_superuser or request.user == common_admin:
+        return render(request, 'view_common_admin.html', {'common_admin': common_admin})
+    else:
+        raise PermissionDenied
+
+
+# @login_required
+# def edit_common_admin(request, pk):
+#     common_admin = CommonAdmin.objects.filter(pk=pk).first()
+#     if common_admin is None:
+#         messages.error(request, 'Common administrator not found.')
+#         return redirect('home')
+#     if request.user.is_superuser or request.user == common_admin:
 
 
 # view for checking all the current inventories
