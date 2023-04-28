@@ -1,10 +1,11 @@
 import datetime
-
+from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 from django.db.models import Q
 from django.views.decorators.csrf import csrf_protect, csrf_exempt
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
+from django.contrib.auth import login
 from django.urls import reverse
 from django.http import HttpResponse
 from .models import Book, Stock, Sale
@@ -18,6 +19,7 @@ def index(request):
 
 
 # view for checking all the current inventories
+@login_required
 def inventory(request):
     books = Book.objects.all()
     search_term = request.GET.get('search')
@@ -42,6 +44,7 @@ def inventory(request):
 
 
 # view for editing certain book
+@login_required
 def edit_book(request, book_id):
     book = get_object_or_404(Book, book_id=book_id)
     if request.method == 'POST':
@@ -60,6 +63,7 @@ def edit_book(request, book_id):
 
 
 # view for checking stock by book_id
+@login_required
 @csrf_exempt
 def stock(request):
     if request.method == 'POST':
@@ -74,6 +78,7 @@ def stock(request):
 
 
 # view for stocking books which have occurred in inventory
+@login_required
 @csrf_exempt
 def stock_partial(request):
     book_id = request.POST.get('book_id')
@@ -92,6 +97,8 @@ def stock_partial(request):
 
 
 # view for stocking books which have not occurred in inventory
+@login_required
+@csrf_exempt
 def stock_complete(request):
     if request.method == 'POST':
         book_id = request.POST.get('book_id')
@@ -114,6 +121,7 @@ def stock_complete(request):
 
 
 # view for checking all the unpaid and unreturned stocks
+@login_required
 @csrf_exempt
 def check_unpaid(request):
     unpaid_books = Stock.objects.filter(paid=False, returned=False)
@@ -122,6 +130,7 @@ def check_unpaid(request):
 
 
 # view for payment
+@login_required
 @csrf_exempt
 def payment(request, pk):
     book_stock = get_object_or_404(Stock, pk=pk)
@@ -141,6 +150,7 @@ def payment(request, pk):
 
 
 # view for checking all the unpaid and unreturned stocks
+@login_required
 @csrf_exempt
 def check_unreturned(request):
     toreturn_books = Stock.objects.filter(paid=False, returned=False)
@@ -149,6 +159,7 @@ def check_unreturned(request):
 
 
 # view for return
+@login_required
 @csrf_exempt
 def return_book(request, pk):
     book_stock = get_object_or_404(Stock, pk=pk)
@@ -159,6 +170,8 @@ def return_book(request, pk):
     return redirect('check_unreturned')
 
 
+# view for purchasing a book
+@login_required
 @csrf_exempt
 def purchase(request):
     if request.method == 'GET':
@@ -198,7 +211,8 @@ def purchase(request):
                       {'book': book, 'quantity': purchase_number, 'total_price': total_price})
 
 
-
+# view for confirmation of the purchase
+@login_required
 @csrf_exempt
 def purchase_success(request):
     if request.method == 'POST':
@@ -214,8 +228,12 @@ def purchase_success(request):
     return render(request, 'purchase_success.html')
 
 
+# view for purchase failure
+@login_required
 @csrf_exempt
 def purchase_fail(request):
     reason = request.GET.get('reason')
     inventory = request.GET.get('inventory')
     return render(request, 'purchase_fail.html', {'reason': reason, 'inventory': inventory})
+
+
