@@ -1,7 +1,41 @@
 from django.db import models
-from django.contrib.auth.models import User
-
+from django.contrib.auth.models import AbstractUser
 # Create your models here.
+
+
+class User(AbstractUser):
+    true_name = models.CharField(max_length=100)
+    work_id = models.CharField(max_length=100)
+    gender = models.CharField(max_length=10, choices=[('male', 'Male'), ('female', 'Female')])
+    age = models.IntegerField()
+    mobile_phone = models.CharField(max_length=20)
+
+    USERNAME_FIELD = 'username'
+
+
+class SuperAdminManager(models.Manager):
+    def get_queryset(self):
+        return super().get_queryset().filter(is_superuser=True)
+
+
+class SuperAdmin(User):
+    objects = SuperAdminManager()
+
+    class Meta:
+        proxy = True
+        ordering = ('-date_joined',)
+
+    def __str__(self):
+        return self.true_name
+
+
+class CommonAdmin(User):
+    class Meta:
+        proxy = True
+        ordering = ('-date_joined',)
+
+    def __str__(self):
+        return self.true_name
 
 
 class Book(models.Model):
