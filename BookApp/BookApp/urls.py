@@ -20,7 +20,8 @@ from BookDBMS import views
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path('', views.login_view, name='login_view'),
+    path('', views.index, name='index'),
+    re_path(r'^.*login\.html$', views.login_view, name='login_view'),
     re_path(r'^.*inventory\.html$', views.inventory, name='inventory'),
     re_path(r'^.*edit_book\.html$', views.edit_book, name='edit_book'),
     re_path(r'^.*stock\.html$', views.stock, name='stock'),

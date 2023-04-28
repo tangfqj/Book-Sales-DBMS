@@ -1,7 +1,60 @@
+
 {% block content %}
+<style>
+      form {
+        width: 430px;
+        margin: 120px auto;
+        padding: 20px;
+        background-color: #fff;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        text-align: center;
+      }
+
+      h1 {
+        font-size: 32px;
+        font-weight: bold;
+        margin-top: 0;
+        margin-bottom: 20px;
+      }
+
+      label {
+        display: block;
+        margin-bottom: 10px;
+        font-size: 18px;
+        font-weight: bold;
+        color: #555;
+        text-align: left;
+      }
+
+      input[type="text"],
+      input[type="password"] {
+        width: 90%;
+        padding: 10px;
+        margin-bottom: 20px;
+        font-size: 18px;
+        border: none;
+        border-radius: 5px;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+      }
+
+      .btn {
+        background-color: #4CAF50;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+        margin-top: 10px;
+      }
+
+      .btn:hover {
+        background-color: #3e8e41;
+      }
+</style>
 <div class="container">
-  <div class="row justify-content-center">
-    <div class="col-md-8">
+  <div class="row justify-content-center align-items-center" style="height: 100vh;">
+    <div class="col-md-4">
       <div class="card">
         <div class="card-header">{{ title }}</div>
         <div class="card-body">
@@ -9,18 +62,50 @@
           <div class="alert alert-danger" role="alert">{{ message }}</div>
           {% endif %}
           <form method="post" action="{% url 'login_view' %}">
+            <h1>Book Sales Management System</h1>
             {% csrf_token %}
-            <label>Username:</label>
-            <input name="username">
-            <div></div>
-            <label>Password:</label>
-            <input name="password">
-            <div></div>
-            <button type="submit" class="btn btn-primary">Login</button>
+            <div class="form-group">
+              <label for="username">Username:</label>
+              <input type="text" class="form-control" id="username" name="username">
+            </div>
+            <div class="form-group">
+              <label for="password">Password:</label>
+              <div class="input-group">
+                <input type="password" class="form-control" id="password" name="password">
+                <div class="input-group-append">
+                  <button type="button" class="btn btn-outline-secondary toggle-password"><i class="fa fa-eye"></i></button>
+                </div>
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Login</button>
           </form>
         </div>
       </div>
     </div>
   </div>
 </div>
+
+<style>
+.toggle-password {
+  background-color: transparent;
+  border: none;
+  margin-left: -42px;
+  z-index: 9999;
+  position: relative;
+}
+</style>
+
+<script>
+$(document).ready(function() {
+  $('.toggle-password').click(function() {
+    $(this).toggleClass('active');
+    var password = $(this).parent().prev('input');
+    if (password.attr('type') === 'password') {
+      password.attr('type', 'text');
+    } else {
+      password.attr('type', 'password');
+    }
+  });
+});
+</script>
 {% endblock %}
