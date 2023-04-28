@@ -52,13 +52,13 @@
 
       .navigation ul {
           list-style: none;
-          margin-top: 30px;
+          margin-top: 60px;
           padding: 0;
       }
 
       .navigation ul li a {
           display: block;
-          padding: 10px;
+          padding: 20px;
           color: #333;
           text-decoration: none;
       }
@@ -101,26 +101,29 @@
     </style>
   </head>
   <body>
-    <header>
-      <h1>Book Sales Management System</h1>
-      <div class="user-profile">
-        <img src="{% static 'user.png' %}" alt="User Profile">
-        <span>John Doe</span>
-      </div>
-    </header>
-    <div class="navigation">
-      <ul>
-        <li><a href="inventory.html">Inventory</a></li>
-        <li><a href="stock.html">Stock</a></li>
-        <li><a href="check_unpaid.html">Payment</a></li>
-        <li><a href="purchase.html">Purchase</a></li>
-        <li><a href="check_unreturned.html">Return</a></li>
-        <li><a href="#contact">Bill</a></li>
-      </ul>
+  <header>
+    <h1>Book Sales Management System</h1>
+    {% if user.is_authenticated %}
+    <div class="user-profile">
+      <img src="{% static 'user.png' %}" alt="User Profile">
+      <span>{{ user.username }}</span>
     </div>
-    <main id="main">
+    {% endif %}
+  </header>
+  <div class="navigation">
+    <ul>
+      <li><a href="inventory.html"><strong>Inventory</strong></a></li>
+      <li><a href="stock.html"><strong>Stock</strong></a></li>
+      <li><a href="check_unpaid.html"><strong>Payment</strong></a></li>
+      <li><a href="purchase.html"><strong>Purchase</strong></a></li>
+      <li><a href="check_unreturned.html"><strong>Return</strong></a></li>
+      <li><a href="#contact"><strong>Bill</strong></a></li>
+      <li><a href="#account"><strong>Account</strong></a> </li>
+    </ul>
+  </div>
+  <main id="main">
     {% block content %}
     {% endblock %}
-    </main>
+  </main>
   </body>
 </html>
