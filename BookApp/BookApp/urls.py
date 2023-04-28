@@ -34,5 +34,7 @@ urlpatterns = [
     path('return_book/<int:pk>/', views.return_book, name='return_book'),
     re_path(r'^.*purchase\.html$', views.purchase, name='purchase'),
     re_path(r'^.*purchase_success\.html$', views.purchase_success, name='purchase_success'),
-    re_path(r'^.*purchase_fail\.html$', views.purchase_fail, name='purchase_fail')
+    re_path(r'^.*purchase_fail\.html$', views.purchase_fail, name='purchase_fail'),
+    re_path(r'^.*personal_profile\.html$', views.profile_view, name='profile_view'),
+    re_path(r'^.*edit_profile\.html$', views.edit_profile, name='edit_profile'),
 ]

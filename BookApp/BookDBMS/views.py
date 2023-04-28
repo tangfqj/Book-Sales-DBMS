@@ -303,3 +303,37 @@ def purchase_fail(request):
     return render(request, 'purchase_fail.html', {'reason': reason, 'inventory': inventory})
 
 
+@login_required
+def profile_view(request):
+    user = request.user
+    context = {
+        'username': user.username,
+        'true_name': user.true_name,
+        'work_id': user.work_id,
+        'gender': user.gender,
+        'email': user.email,
+        'mobile_phone': user.mobile_phone,
+    }
+    return render(request, 'personal_profile.html', context)
+
+
+@csrf_exempt
+@login_required
+def edit_profile(request):
+    user = request.user
+    context = {
+        'true_name': user.true_name,
+        'work_id': user.work_id,
+        'email': user.email,
+        'mobile_phone': user.mobile_phone
+    }
+    if request.method == 'POST':
+        new_email = request.POST.get('new_email')
+        if new_email:
+            user.email = new_email
+        new_mobile_phone = request.POST.get('new_mobile_phone')
+        if new_mobile_phone:
+            user.mobile_phone = new_mobile_phone
+        user.save()
+        return redirect('edit_profile')
+    return render(request, 'edit_profile.html', context)
