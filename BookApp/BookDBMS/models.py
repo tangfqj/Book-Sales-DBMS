@@ -106,6 +106,7 @@ class Bill(models.Model):
     book = models.ForeignKey(Book, on_delete=models.CASCADE)
     price = models.DecimalField(max_digits=10, decimal_places=2, default=0)
     quantity = models.PositiveIntegerField()
+    total_price = models.DecimalField(max_digits=10, decimal_places=2, default=0)
     txn_type = models.CharField(max_length=10)  # 'purchase' or 'payment'
     date = models.DateTimeField(auto_now_add=True)
 

@@ -186,7 +186,9 @@ def payment(request, pk):
             book.inventory += book_stock.stock_number
             book.sales_price = form.cleaned_data['sales_price']
             book.save()
-            billitem = Bill(user=request.user, book=book, quantity=book_stock.stock_number, txn_type="payment")
+            total_price = book_stock.stock_price * book_stock.stock_number
+            billitem = Bill(user=request.user, book=book, price=book_stock.stock_price, quantity=book_stock.stock_number,
+                            total_price=total_price, txn_type="stock")
             billitem.save()
             book_stock.save()
             return redirect('check_unpaid')
@@ -266,7 +268,9 @@ def purchase_success(request):
         purchase_number = request.POST.get('quantity')
         book = get_object_or_404(Book, book_id=book_id)
         sale = Sale(book=book, sale_number=purchase_number)
-        billitem = Bill(user=request.user, book=book, price=book.sales_price, quantity=purchase_number, txn_type="purchase")
+        total_price = float(book.sales_price) * int(purchase_number)
+        billitem = Bill(user=request.user, book=book, price=book.sales_price, quantity=purchase_number,
+                        total_price=total_price, txn_type="sales")
         billitem.save()
         sale.save()
 
@@ -353,3 +357,17 @@ def view_all_account(request):
         'page_obj': page_obj,
     }
     return render(request, 'view_all_account.html', context)
+
+@login_required
+@csrf_exempt
+def view_bill(request):
+    bill = Bill.objects.all()
+    paginator = Paginator(bill, 20)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    context = {
+        'bill': page_obj,
+        'is_paginated': paginator.num_pages > 1,
+        'page_obj': page_obj,
+    }
+    return render(request, 'bill.html', context)

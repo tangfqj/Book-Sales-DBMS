@@ -1,0 +1,125 @@
+{% extends 'base.html' %}
+{% block content %}
+    <style>
+        #search-form {
+          margin-bottom: 20px;
+          display: flex;
+          justify-content: flex-start;
+          align-items: center;
+        }
+
+        #search-form input[type="text"] {
+          padding: 8px;
+          border: 1px solid #ccc;
+          border-radius: 4px;
+          font-size: 16px;
+          margin-right: 10px;
+        }
+
+        #search-form button[type="submit"] {
+          padding: 8px;
+          border: 1px solid #ccc;
+          border-radius: 4px;
+          font-size: 16px;
+          background-color: #A9A9A9;
+          color: #fff;
+          cursor: pointer;
+        }
+
+        .pagination {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 18px;
+          }
+
+        .pagination a {
+            display: inline-block;
+            padding: 10px;
+            border-radius: 5px;
+            color: #555;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            margin: 0 5px;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .pagination a:hover {
+            background-color: #eee;
+        }
+
+        .current-page {
+            font-weight: bold;
+            margin: 0 10px;
+        }
+
+        #edit {
+            display: inline-block;
+            padding: 5px;
+            border-radius: 5px;
+            color: #fff;
+            background-color: #1E90FF;
+            border: none;
+            margin: 0 5px;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+          }
+
+          #edit:hover {
+            background-color: #0069d9;
+          }
+      </style>
+
+    <h2>All Bill</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Book_id</th>
+                <th>Title</th>
+                <th>Price</th>
+                <th>Number</th>
+                <th>Total Price</th>
+                <th>Type</th>
+                <th>Operated by</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for billitem in bill %}
+            <tr>
+                <td>{{ billitem.book.book_id }}</td>
+                <td>{{ billitem.book.title }}</td>
+                <td>{{ billitem.price }}</td>
+                <td>{{ billitem.quantity }}</td>
+                <td>{{ billitem.total_price }}</td>
+                <td>{{ billitem.txn_type }}</td>
+                <td>{{ billitem.user.username }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="10">No User found.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+      </table>
+      {% if is_paginated %}
+          <div class="pagination">
+              <span class="step-links">
+              {% if bill.has_previous %}
+                  <a href="?page=1">&laquo; first</a>
+                  <a href="?page={{ bill.previous_page_number }}">&lsaquo; previous</a>
+              {% endif %}
+
+              <span class="current-page">
+                  Page {{ bill.number }} of {{ bill.paginator.num_pages }}.
+              </span>
+
+              {% if users.has_next %}
+                  <a href="?page={{ bill.next_page_number }}">next &rsaquo;</a>
+                  <a href="?page={{ bill.paginator.num_pages }}">last &raquo;</a>
+              {% endif %}
+              </span>
+          </div>
+      {% endif %}
+{% endblock %}
