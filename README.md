@@ -48,12 +48,20 @@ Now you can log in with the provided super administrator account.
 ### E-R Diagram
 
 ### Relational Schema & Constraints
-User *(<u>user_id</u>, username, password, true_name, work_id, email, mobile_phone, gender, age, is_superuser)*
+**The entity sets are listed below:**
 
-Book *(<u>book_id</u>, title, author, publisher, isbn, sales_price, inventory)*
+_User:_ with attributes _(<u>user_id</u>, username, password, true_name, work_id, email, mobile_phone, gender, age, is_superuser)_
 
-Stock *(<u>stock_id</u>, book_id, stock_number, stock_price, date, is_paid, is_returned)*
+_Book:_ with attributes *(<u>book_id</u>, title, author, publisher, isbn, sales_price, inventory)*
 
-Sale *(<u>sale_id</u>, book_id, sale_number, date)*
+_Bill:_ with attributes *(<u>bill_id</u>, book_id, user_id, quantity, price, txn_type, date)*
 
-make_stock(user_id,stock_id,)       
+**The relationship sets are listed below:**
+
+_stock:_ relating User with Book
+
+_payment:_ relating User with Book through Bill
+
+_sell:_ relating User with Book through Bill
+
+_create_account:_ relating User(common) with User(super)
