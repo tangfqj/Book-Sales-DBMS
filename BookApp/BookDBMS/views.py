@@ -365,3 +365,17 @@ def create_account(request):
         user.save()
         return redirect('create_account')
     return render(request, 'create_account.html')
+
+
+@login_required
+def view_all_account(request):
+    users = User.objects.all().order_by('work_id')
+    paginator = Paginator(users, 20)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    context = {
+        'users': page_obj,
+        'is_paginated': paginator.num_pages > 1,
+        'page_obj': page_obj,
+    }
+    return render(request, 'view_all_account.html', context)
