@@ -1,3 +1,38 @@
-<html lang="en">
-    <h1>This is edit_book page</h1>
-</html>
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container">
+    <h2>Edit Book Details</h2>
+    <hr>
+    <form method="post">
+        {% csrf_token %}
+        <br>
+        <label><strong>Current Title:</strong> {{ book.title }}</label>
+        <br>
+        <label for="new_title">New Title:</label>
+        <input type="text" name="new_title" id="new_title">
+        <br>
+        <label><strong>Current Author:</strong> {{ book.author }}</label>
+        <br>
+        <label for="new_author">New Author:</label>
+        <input type="text" name="new_author" id="new_author">
+        <br>
+        <label><strong>Current Publisher:</strong> {{ book.publisher }}</label>
+        <br>
+        <label for="new_publisher">New Publisher:</label>
+        <input type="text" name="new_publisher" id="new_publisher">
+        <br>
+        <label><strong>Current ISBN:</strong> {{ book.isbn }}</label>
+        <br>
+        <label for="new_isbn">New ISBN:</label>
+        <input type="text" name="new_isbn" id="new_isbn">
+        <br>
+        <label><strong>Current Sales Price:</strong> {{ book.sales_price }}</label>
+        <br>
+        <label for="new_sales_price">New Sales Price:</label>
+        <input type="number" step="0.01" name="new_sales_price" id="new_sales_price">
+        <br>
+        <button type="submit" class="btn btn-primary">Update Book</button>
+    </form>
+    </div>
+{% endblock %}

@@ -10,7 +10,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
 from django.views.decorators.csrf import csrf_exempt
 
-from .forms import BookForm, SalesPriceForm, CommonAdminForm
+from .forms import SalesPriceForm, CommonAdminForm
 from .models import CommonAdmin, Book, Stock, Sale
 
 # Create your views here.
@@ -75,19 +75,10 @@ def view_common_admin(request, pk):
         raise PermissionDenied
 
 
-# @login_required
-# def edit_common_admin(request, pk):
-#     common_admin = CommonAdmin.objects.filter(pk=pk).first()
-#     if common_admin is None:
-#         messages.error(request, 'Common administrator not found.')
-#         return redirect('home')
-#     if request.user.is_superuser or request.user == common_admin:
-
-
 # view for checking all the current inventories
 @login_required
 def inventory(request):
-    books = Book.objects.all()
+    books = Book.objects.all().order_by('book_id')
     search_term = request.GET.get('search')
     if search_term:
         books = books.filter(
@@ -111,18 +102,28 @@ def inventory(request):
 
 # view for editing certain book
 @login_required
-def edit_book(request, book_id):
-    book = get_object_or_404(Book, book_id=book_id)
+@csrf_exempt
+def edit_book(request, pk):
+    book = get_object_or_404(Book, pk=pk)
     if request.method == 'POST':
-        form = BookForm(request.POST, instance=book)
-        if form.is_valid():
-            form.save()
-            messages.success(request, 'Book details updated successfully!')
-            return redirect('inventory')
-    else:
-        form = BookForm(instance=book)
+        new_title = request.POST.get('new_title')
+        if new_title:
+            book.title = new_title
+        new_author = request.POST.get('new_author')
+        if new_author:
+            book.author = new_author
+        new_publisher = request.POST.get('new_publisher')
+        if new_publisher:
+            book.publisher = new_publisher
+        new_isbn = request.POST.get('new_isbn')
+        if new_isbn:
+            book.isbn = new_isbn
+        new_sales_price = request.POST.get('new_sales_price')
+        if new_sales_price:
+            book.sales_price = new_sales_price
+        book.save()
+        return redirect('inventory')
     context = {
-        'form': form,
         'book': book,
     }
     return render(request, 'edit_book.html', context)

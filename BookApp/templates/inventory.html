@@ -55,7 +55,7 @@
             margin: 0 10px;
         }
 
-        .edit-btn {
+        #edit {
             display: inline-block;
             padding: 5px;
             border-radius: 5px;
@@ -67,7 +67,7 @@
             transition: background-color 0.3s ease;
           }
 
-          .edit-btn:hover {
+          #edit:hover {
             background-color: #0069d9;
           }
       </style>
@@ -100,7 +100,12 @@
                 <td>{{ book.isbn }}</td>
                 <td>{{ book.sales_price }}</td>
                 <td>{{ book.inventory }}</td>
-                <td><a href="edit_book.html" class="edit-btn">Edit</a></td>
+                <td>
+                    <form action="{% url 'edit_book' book %}" method="post">
+                        {% csrf_token %}
+                        <input type="submit" value="Edit" id="edit">
+                    </form>
+                </td>
             </tr>
             {% empty %}
             <tr>
