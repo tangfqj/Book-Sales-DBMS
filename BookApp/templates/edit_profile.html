@@ -10,9 +10,9 @@
           padding: 10px;
           border: 1px solid #ddd;
           border-radius: 4px;
-          font-size: 16px;
+          font-size: 10px;
           margin-bottom: 10px;
-          width: 50%;
+          width: 30%;
           box-sizing: content-box;
         }
 
@@ -32,24 +32,31 @@
         }
     </style>
 
-    <h2>Stock an Existing Book</h2>
+    <h2>Edit Profile</h2>
     <form method="post" action="{% url 'edit_profile' %}">
     {% csrf_token %}
         <br>
         <label><strong>True Name:</strong> {{ true_name }}</label>
         <br>
+        <br>
         <label><strong>Work ID:</strong> {{ work_id }}</label>
+        <br>
         <br>
         <label><strong>Current Email:</strong> {{ email }}</label>
         <br>
-        <label for="new_email">New Email:</label>
+        <br>
+        <label for="new_email"><strong>New Email:</strong></label>
         <input type="text"  name="new_email" id="new_email">
+        <br>
         <br>
         <label><strong>Current Mobile Phone:</strong> {{ mobile_phone }}</label>
         <br>
-        <label for="new_mobile_phone">New Mobile Phone:</label>
+        <br>
+        <label for="new_mobile_phone"><strong>New Mobile Phone:</strong></label>
         <input type="text" name="new_mobile_phone" id="new_mobile_phone">
+        <br>
         <br>
         <input type="submit" onclick="alert('Edit Successfully!')" value="Edit">
     </form>
+
 {% endblock %}

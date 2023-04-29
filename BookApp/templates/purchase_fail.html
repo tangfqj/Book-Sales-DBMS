@@ -1,15 +1,26 @@
 {% extends 'base.html' %}
 {% block content %}
     <style>
-
+        h2 {
+            color: #333333;
+            font-size: 32px;
+            margin-bottom: 20px;
+        }
+        p {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+        a {
+            color: #0077cc;
+        }
     </style>
     <h2>Sorry, the purchase encounters some problem...</h2>
     {% if reason == 'Book not found' %}
         <p>The book you searched for could not be found.</p>
     {% else %}
-        <p>Sorry, there is not enough inventory for this book.</p>
-    <p>The current inventory is {{ inventory }}.</p>
+        <p>There is not enough inventory for this book.</p>
+        <p>The current inventory is <strong>{{ inventory }}</strong>.</p>
     {% endif %}
 
-    <p><a href="{% url 'purchase' %}">Back to Purchase Page</a></p>
+    <p><a href="{% url 'purchase' %}">&lt;&lt; Back to Purchase Page</a></p>
 {% endblock %}

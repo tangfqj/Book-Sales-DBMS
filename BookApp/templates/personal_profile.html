@@ -1,23 +1,61 @@
 {% extends 'account_base.html' %}
 
 {% block content %}
-<div class="container">
-  <div class="row justify-content-center">
-    <div class="col-md-8">
-      <div class="card">
-        <div class="card-header">User Profile</div>
-        <div class="card-body">
-          <ul>
-            <li><strong>Username:</strong> {{ username }}</li>
-            <li><strong>True Name:</strong> {{ true_name }}</li>
-            <li><strong>Work ID:</strong> {{ work_id }}</li>
-            <li><strong>Gender:</strong> {{ gender }}</li>
-            <li><strong>Email:</strong> {{ email }}</li>
-            <li><strong>Mobile Phone:</strong> {{ mobile_phone }}</li>
-          </ul>
+    <style>
+        .container {
+          margin: 50px auto;
+          padding: 20px;
+          background-color: #f2f2f2;
+          border-radius: 10px;
+          box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-header {
+          font-size: 22px;
+          background-color: #A9A9A9;
+          color: #fff;
+          padding: 10px;
+          border-top-left-radius: 10px;
+          border-top-right-radius: 10px;
+        }
+
+        .card-body ul {
+          list-style: none;
+          margin: 0;
+          padding: 0;
+        }
+
+        .card-body li {
+          font-size: 17px;
+          margin: 10px 10px;
+          margin-bottom: 20px;
+        }
+
+        .card-body li strong {
+          font-weight: bold;
+        }
+
+        .card-body li:last-child {
+          margin-bottom: 0;
+        }
+    </style>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header">User Profile</div>
+                    <div class="card-body">
+                        <ul>
+                            <li><strong>Username:</strong> {{ username }}</li>
+                            <li><strong>True Name:</strong> {{ true_name }}</li>
+                            <li><strong>Work ID:</strong> {{ work_id }}</li>
+                            <li><strong>Gender:</strong> {{ gender }}</li>
+                            <li><strong>Email:</strong> {{ email }}</li>
+                            <li><strong>Mobile Phone:</strong> {{ mobile_phone }}</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
-</div>
 {% endblock %}

@@ -1,7 +1,46 @@
 {% extends 'base.html' %}
 {% block content %}
     <style>
+        label {
+          font-size: 20px;
+          font-weight: bold;
+        }
 
+        select {
+          padding: 10px;
+          border: 1px solid #ddd;
+          border-radius: 4px;
+          font-size: 12px;
+          margin-bottom: 20px;
+          width: 5%;
+          box-sizing: content-box;
+        }
+
+        input[type="text"],
+        input[type="number"] {
+          padding: 10px;
+          border: 1px solid #ddd;
+          border-radius: 4px;
+          font-size: 12px;
+          margin-bottom: 20px;
+          width: 20%;
+          box-sizing: content-box;
+        }
+
+        input[type="submit"] {
+            background-color: #4CAF50;
+            border: none;
+            border-radius: 4px;
+            color: white;
+            cursor: pointer;
+            font-size: 16px;
+            padding: 10px;
+            transition: background-color 0.3s ease;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #3e8e41;
+        }
     </style>
     <h2>Purchase Book</h2>
     <form method="GET" action="{% url 'purchase' %}">
