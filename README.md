@@ -46,6 +46,7 @@ Now you can log in with the provided super administrator account.
 
 ## Database Schema
 ### E-R Diagram
+![](D:\Book-Sales-DBMS\images\er-diagram.png)
 
 ### Relational Schema & Constraints
 **The entity sets are listed below:**
