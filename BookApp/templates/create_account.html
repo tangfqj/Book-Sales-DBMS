@@ -8,7 +8,7 @@
           border-radius: 4px;
           font-size: 16px;
           margin-bottom: 10px;
-          width: 50%;
+          width: 30%;
           box-sizing: content-box;
         }
 
@@ -25,6 +25,16 @@
 
         input[type="submit"]:hover {
           background-color: #3e8e41;
+        }
+
+        select {
+          padding: 10px;
+          border: 1px solid #ddd;
+          border-radius: 4px;
+          font-size: 16px;
+          margin-bottom: 10px;
+          width: 9%;
+          box-sizing: content-box;
         }
     </style>
 
@@ -51,7 +61,10 @@
         <input type="text" name="mobile_phone" id="mobile_phone" required>
         <br>
         <label for="gender">Gender:</label>
-        <input type="text" name="gender" id="gender" required>
+        <select name="gender" id="gender">
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+        </select>
         <br>
         <label for="age">Age:</label>
         <input type="number" name="age" id="age" required>
