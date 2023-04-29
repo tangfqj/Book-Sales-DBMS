@@ -120,7 +120,9 @@
       <li><a href="check_unpaid.html"><strong>Payment</strong></a></li>
       <li><a href="purchase.html"><strong>Purchase</strong></a></li>
       <li><a href="check_unreturned.html"><strong>Return</strong></a></li>
+      {% if user.is_superuser %}
       <li><a href="#contact"><strong>Bill</strong></a></li>
+      {% endif %}
       <li><a href="personal_profile.html"><strong>Account</strong></a> </li>
     </ul>
   </div>

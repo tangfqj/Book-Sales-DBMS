@@ -2,18 +2,16 @@ import datetime
 
 from django.contrib import messages
 from django.contrib.auth import forms, authenticate, login, logout
-from django.contrib.auth.decorators import login_required, user_passes_test
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.hashers import make_password
-from django.core.exceptions import PermissionDenied
 from django.core.paginator import Paginator
 from django.db.models import Q
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
 from django.views.decorators.csrf import csrf_exempt
 
-from .forms import SalesPriceForm, CommonAdminForm
-from .models import CommonAdmin, Book, Stock, Sale, User
-
+from .forms import SalesPriceForm
+from .models import Book, Stock, Sale, User, Bill
 
 # Create your views here.
 
@@ -39,6 +37,7 @@ def login_view(request):
             messages.error(request, 'Invalid username or password.')
     return render(request, "login.html")
 
+
 @login_required
 def logout_view(request):
     logout(request)
@@ -49,34 +48,6 @@ def is_superadmin(user):
     return user.is_authenticated and user.is_superuser
 
 
-@user_passes_test(is_superadmin)
-def create_common_admin(request):
-    if request.method == 'POST':
-        form = CommonAdminForm(request.POST)
-        if form.is_valid():
-            user = form.save(commit=False)
-            user.set_password(form.cleaned_data['password'])
-            user.save()
-            messages.success(request, 'Common administrator account has been created successfully.')
-            return redirect('view_common_admin', pk=user.pk)
-    else:
-        form = CommonAdminForm()
-
-    return render(request, 'create_common_admin.html', {'form': form})
-
-
-@login_required
-def view_common_admin(request, pk):
-    common_admin = CommonAdmin.objects.filter(pk=pk).first()
-    if common_admin is None:
-        messages.error(request, 'Common administrator not found.')
-        return redirect('home')
-    if request.user.is_superuser or request.user == common_admin:
-        return render(request, 'view_common_admin.html', {'common_admin': common_admin})
-    else:
-        raise PermissionDenied
-
-
 # view for checking all the current inventories
 @login_required
 def inventory(request):
@@ -84,7 +55,7 @@ def inventory(request):
     search_term = request.GET.get('search')
     if search_term:
         books = books.filter(
-            Q(book_id=search_term) |
+            Q(book_id__icontains=search_term) |
             Q(isbn__icontains=search_term) |
             Q(title__icontains=search_term) |
             Q(author__icontains=search_term) |
@@ -215,6 +186,8 @@ def payment(request, pk):
             book.inventory += book_stock.stock_number
             book.sales_price = form.cleaned_data['sales_price']
             book.save()
+            billitem = Bill(user=request.user, book=book, quantity=book_stock.stock_number, txn_type="payment")
+            billitem.save()
             book_stock.save()
             return redirect('check_unpaid')
     else:
@@ -292,8 +265,9 @@ def purchase_success(request):
         book_id = request.POST.get('book_id')
         purchase_number = request.POST.get('quantity')
         book = get_object_or_404(Book, book_id=book_id)
-
         sale = Sale(book=book, sale_number=purchase_number)
+        billitem = Bill(user=request.user, book=book, price=book.sales_price, quantity=purchase_number, txn_type="purchase")
+        billitem.save()
         sale.save()
 
         return redirect(reverse('purchase'))
