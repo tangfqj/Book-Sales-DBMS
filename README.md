@@ -48,12 +48,12 @@ Now you can log in with the provided super administrator account.
 ### E-R Diagram
 
 ### Relational Schema & Constraints
-User*(<u>user_id</u>, username, password, true_name, work_id, email, mobile_phone, gender, age, is_superuser)*
+User *(<u>user_id</u>, username, password, true_name, work_id, email, mobile_phone, gender, age, is_superuser)*
 
-Book*(<u>book_id</u>, title, author, publisher, isbn, sales_price, inventory)*
+Book *(<u>book_id</u>, title, author, publisher, isbn, sales_price, inventory)*
 
-Stock*(<u>stock_id</u>, book_id, stock_number, stock_price, date, is_paid, is_returned)*
+Stock *(<u>stock_id</u>, book_id, stock_number, stock_price, date, is_paid, is_returned)*
 
-Sale*(<u>sale_id</u>, book_id, sale_number, date)*
+Sale *(<u>sale_id</u>, book_id, sale_number, date)*
 
 make_stock(user_id,stock_id,)       
