@@ -101,7 +101,7 @@
                 <td>{{ book.sales_price }}</td>
                 <td>{{ book.inventory }}</td>
                 <td>
-                    <form action="{% url 'edit_book' book %}" method="post">
+                    <form action="{% url 'edit_book' book.pk %}" method="post">
                         {% csrf_token %}
                         <input type="submit" value="Edit" id="edit">
                     </form>

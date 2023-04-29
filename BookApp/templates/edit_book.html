@@ -3,8 +3,7 @@
 {% block content %}
     <div class="container">
     <h2>Edit Book Details</h2>
-    <hr>
-    <form method="post">
+    <form method="post" action="{% url 'edit_book' book.pk %}">
         {% csrf_token %}
         <br>
         <label><strong>Current Title:</strong> {{ book.title }}</label>

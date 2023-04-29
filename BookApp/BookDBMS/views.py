@@ -101,7 +101,6 @@ def inventory(request):
 
 
 # view for editing certain book
-@login_required
 @csrf_exempt
 def edit_book(request, pk):
     book = get_object_or_404(Book, pk=pk)
@@ -122,7 +121,12 @@ def edit_book(request, pk):
         if new_sales_price:
             book.sales_price = new_sales_price
         book.save()
-        return redirect('inventory')
+        if new_title is not None or new_author is not None or new_publisher is not None or new_isbn is not None or \
+                new_sales_price is not None:
+            return redirect('inventory')
+        else:
+            return render(request, 'edit_book.html', {'book': book})
+
     context = {
         'book': book,
     }
