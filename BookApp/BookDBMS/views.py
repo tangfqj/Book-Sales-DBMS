@@ -3,6 +3,7 @@ import datetime
 from django.contrib import messages
 from django.contrib.auth import forms, authenticate, login, logout
 from django.contrib.auth.decorators import login_required, user_passes_test
+from django.contrib.auth.hashers import make_password
 from django.core.exceptions import PermissionDenied
 from django.core.paginator import Paginator
 from django.db.models import Q
@@ -11,7 +12,8 @@ from django.urls import reverse
 from django.views.decorators.csrf import csrf_exempt
 
 from .forms import SalesPriceForm, CommonAdminForm
-from .models import CommonAdmin, Book, Stock, Sale
+from .models import CommonAdmin, Book, Stock, Sale, User
+
 
 # Create your views here.
 
@@ -342,3 +344,24 @@ def edit_profile(request):
         user.save()
         return redirect('edit_profile')
     return render(request, 'edit_profile.html', context)
+
+
+@csrf_exempt
+@login_required
+def create_account(request):
+    if request.method == "POST":
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        password = make_password(password)
+        email = request.POST.get('email')
+        true_name = request.POST.get('true_name')
+        work_id = request.POST.get('work_id')
+        gender = request.POST.get('gender')
+        age = request.POST.get('age')
+        age = int(age)
+        mobile_phone = request.POST.get('mobile_phone')
+        user = User(username=username, password=password, email=email, true_name=true_name, work_id=work_id,
+                    gender=gender, age=age, mobile_phone=mobile_phone, is_superuser=False, is_active=True, is_staff=True)
+        user.save()
+        return redirect('create_account')
+    return render(request, 'create_account.html')

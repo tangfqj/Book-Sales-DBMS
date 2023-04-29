@@ -1,0 +1,61 @@
+{% extends 'account_base.html' %}
+{% block content %}
+    <style>
+        input[type="text"],
+        input[type="number"] {
+          padding: 10px;
+          border: 1px solid #ddd;
+          border-radius: 4px;
+          font-size: 16px;
+          margin-bottom: 10px;
+          width: 50%;
+          box-sizing: content-box;
+        }
+
+        input[type="submit"] {
+          background-color: #4CAF50;
+          color: #fff;
+          padding: 10px 20px;
+          font-size: 18px;
+          border: none;
+          border-radius: 4px;
+          cursor: pointer;
+          transition: background-color 0.3s ease;
+        }
+
+        input[type="submit"]:hover {
+          background-color: #3e8e41;
+        }
+    </style>
+
+    <h2>Create New Account</h2>
+    <form method="post" action="{% url 'create_account' %}">
+    {% csrf_token %}
+        <br>
+        <label for="username">Username:</label>
+        <input type="text" name="username"  id="username" required>
+        <br>
+        <label for="password">Password:</label>
+        <input type="text" name="password"  id="password" required>
+        <br>
+        <label for="true_name">True Name:</label>
+        <input type="text" name="true_name"  id="true_name" required>
+        <br>
+        <label for="work_id">Work ID:</label>
+        <input type="text" name="work_id"  id="work_id" required>
+        <br>
+        <label for="email">Email:</label>
+        <input type="text" name="email"  id="email" required>
+        <br>
+        <label for="mobile_phone">Mobile Phone:</label>
+        <input type="text" name="mobile_phone" id="mobile_phone" required>
+        <br>
+        <label for="gender">Gender:</label>
+        <input type="text" name="gender" id="gender" required>
+        <br>
+        <label for="age">Age:</label>
+        <input type="number" name="age" id="age" required>
+        <br>
+        <input type="submit" value="Create">
+    </form>
+{% endblock %}
