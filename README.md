@@ -16,7 +16,7 @@ Run the following command to start server:
 python manage.py runserver
 ```
 
-Now you can log in with the provided super administrator account.
+Now you can log in with the provided super administrator account in ```account.txt```.
 
 
 ## Project File Structure
