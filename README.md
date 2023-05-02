@@ -7,7 +7,7 @@ This is a book sales management system using Django and PostgresSQL. It is not o
 ## Get Started
 Open the project in ```BookApp``` directory.
 
-Restore the example data in PostgresSQL.
+Restore the example data ```example.sql``` in PostgresSQL.
 
 Make sure you've installed ```Django``` and ```psycopg2-binary```
 
