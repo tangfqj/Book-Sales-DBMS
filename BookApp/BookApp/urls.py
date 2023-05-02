@@ -38,6 +38,7 @@ urlpatterns = [
     re_path(r'^.*bill\.html$', views.view_bill, name='view_bill'),
     re_path(r'^.*personal_profile\.html$', views.profile_view, name='profile_view'),
     re_path(r'^.*edit_profile\.html$', views.edit_profile, name='edit_profile'),
+    path('admin_edit_profile/<int:pk>/', views.admin_edit_profile, name='admin_edit_profile'),
     re_path(r'^.*view_all_account\.html$', views.view_all_account, name='view_all_account'),
     re_path(r'^.*create_account\.html$', views.create_account, name='create_account'),
 ]

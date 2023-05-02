@@ -159,7 +159,7 @@ def stock_complete(request):
         stock_entry = Stock(book=book, stock_number=stock_num, stock_price=stock_price, date=datetime.date.today(),
                             paid=False, returned=False)
         stock_entry.save()
-        return render(request, 'stock_complete.html')
+        return render(request, 'stock.html')
     else:
         return render(request, 'stock_complete.html')
 
@@ -322,6 +322,31 @@ def edit_profile(request):
         user.save()
         return redirect('edit_profile')
     return render(request, 'edit_profile.html', context)
+
+
+@csrf_exempt
+@login_required
+def admin_edit_profile(request, pk):
+    user = User.objects.filter(pk=pk).first()
+    context = {
+        'true_name': user.true_name,
+        'work_id': user.work_id,
+        'email': user.email,
+        'mobile_phone': user.mobile_phone
+    }
+    if request.method == 'POST':
+        new_email = request.POST.get('new_email')
+        if new_email:
+            user.email = new_email
+        new_mobile_phone = request.POST.get('new_mobile_phone')
+        if new_mobile_phone:
+            user.mobile_phone = new_mobile_phone
+        user.save()
+        if new_email is not None or new_mobile_phone is not None:
+            return redirect('view_all_account')
+        else:
+            return render(request, 'admin_edit_profile.html', context)
+    return render(request, 'admin_edit_profile.html', context)
 
 
 @csrf_exempt

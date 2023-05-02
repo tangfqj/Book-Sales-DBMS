@@ -1,0 +1,62 @@
+{% extends 'account_base.html' %}
+{% block content %}
+    <style>
+        label {
+            font-size: 18px;
+        }
+
+        input[type="text"],
+        input[type="number"] {
+          padding: 10px;
+          border: 1px solid #ddd;
+          border-radius: 4px;
+          font-size: 10px;
+          margin-bottom: 10px;
+          width: 30%;
+          box-sizing: content-box;
+        }
+
+        input[type="submit"] {
+          background-color: #4CAF50;
+          color: #fff;
+          padding: 10px 20px;
+          font-size: 18px;
+          border: none;
+          border-radius: 4px;
+          cursor: pointer;
+          transition: background-color 0.3s ease;
+        }
+
+        input[type="submit"]:hover {
+          background-color: #3e8e41;
+        }
+    </style>
+
+    <h2>Edit Profile</h2>
+    <form method="post" action="{% url 'admin_edit_profile' user.pk %}">
+    {% csrf_token %}
+        <br>
+        <label><strong>True Name:</strong> {{ true_name }}</label>
+        <br>
+        <br>
+        <label><strong>Work ID:</strong> {{ work_id }}</label>
+        <br>
+        <br>
+        <label><strong>Current Email:</strong> {{ email }}</label>
+        <br>
+        <br>
+        <label for="new_email"><strong>New Email:</strong></label>
+        <input type="text"  name="new_email" id="new_email">
+        <br>
+        <br>
+        <label><strong>Current Mobile Phone:</strong> {{ mobile_phone }}</label>
+        <br>
+        <br>
+        <label for="new_mobile_phone"><strong>New Mobile Phone:</strong></label>
+        <input type="text" name="new_mobile_phone" id="new_mobile_phone">
+        <br>
+        <br>
+        <input type="submit" onclick="alert('Edit Successfully!')" value="Edit">
+    </form>
+
+{% endblock %}

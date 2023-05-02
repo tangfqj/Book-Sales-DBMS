@@ -97,7 +97,7 @@
                 <td>{{ user.gender }}</td>
                 <td>{{ user.age }}</td>
                 <td>
-                    <form method="post">
+                    <form action="{% url 'admin_edit_profile' user.pk %}" method="post">
                         {% csrf_token %}
                         <input type="submit" value="Edit" id="edit">
                     </form>
