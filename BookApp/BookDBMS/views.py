@@ -1,7 +1,7 @@
 import datetime
 
 from django.contrib import messages
-from django.contrib.auth import forms, authenticate, login, logout
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.hashers import make_password
 from django.core.paginator import Paginator
@@ -19,6 +19,7 @@ from .models import Book, Stock, Sale, User, Bill
 # view for the main page
 def index(request):
     return render(request, "index.html")
+
 
 @csrf_exempt
 def login_view(request):
@@ -382,6 +383,7 @@ def view_all_account(request):
         'page_obj': page_obj,
     }
     return render(request, 'view_all_account.html', context)
+
 
 @login_required
 @csrf_exempt
