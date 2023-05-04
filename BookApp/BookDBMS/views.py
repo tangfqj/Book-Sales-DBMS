@@ -8,6 +8,7 @@ from django.core.paginator import Paginator
 from django.db.models import Q
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
+from django.utils import timezone
 from django.views.decorators.csrf import csrf_exempt
 
 from .forms import SalesPriceForm
@@ -398,3 +399,47 @@ def view_bill(request):
         'page_obj': page_obj,
     }
     return render(request, 'bill.html', context)
+
+
+# Experiment
+from django.db.models import Sum
+from .models import Bill
+
+
+def test(request):
+    context = {}
+    date_filter = request.GET.get('date_filter', 'day')  # Default to filtering by day
+    sales = Bill.objects.filter(txn_type='sales')
+    payments = Bill.objects.filter(txn_type='stock')
+
+    if date_filter == 'day':
+        date = request.GET.get('date', timezone.now().date())
+        sales = sales.filter(date__date=date)
+        payments = payments.filter(date__date=date)
+    elif date_filter == 'month':
+        date = request.GET.get('month', timezone.now().strftime('%Y-%m'))
+        year, month = map(int, date.split('-'))
+        sales = sales.filter(date__year=year, date__month=month)
+        payments = payments.filter(date__year=year, date__month=month)
+    elif date_filter == 'year':
+        year = request.GET.get('year', timezone.now().year)
+        sales = sales.filter(date__year=year)
+        payments = payments.filter(date__year=year)
+    # Filter by date
+    # if date_filter == 'day':
+    #     sales = sales.filter(date__date=request.GET.get('date', timezone.now().date()))
+    #     payments = payments.filter(date__date=request.GET.get('date', timezone.now().date()))
+    # elif date_filter == 'month':
+    #     sales = sales.filter(date__month=request.GET.get('month', timezone.now().month))
+    #     payments = payments.filter(date__month=request.GET.get('month', timezone.now().month))
+    # elif date_filter == 'year':
+    #     sales = sales.filter(date__year=request.GET.get('year', timezone.now().year))
+    #     payments = payments.filter(date__year=request.GET.get('year', timezone.now().year))
+
+    # Calculate totals
+    context['total_sales'] = sales.aggregate(total_sales=Sum('total_price'))['total_sales'] or 0
+    context['total_payments'] = payments.aggregate(total_payments=Sum('total_price'))['total_payments'] or 0
+    context['sales_count'] = sales.aggregate(sales_count=Sum('quantity'))['sales_count'] or 0
+    context['stock_count'] = payments.aggregate(stock_count=Sum('quantity'))['stock_count'] or 0
+
+    return render(request, 'test.html', context)

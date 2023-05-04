@@ -1,0 +1,151 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <style>
+        .container {
+          margin: 20px auto;
+
+          max-width: 800px;
+        }
+        .row {
+          display: flex;
+          justify-content: space-between;
+          flex-wrap: wrap;
+        }
+        .card {
+          width: 200px;
+          height: 200px;
+          margin-bottom: 20px;
+          box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+          border: none;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+        }
+        .card-title {
+          font-size: 1.2rem;
+          font-weight: bold;
+          text-align: center;
+          margin-bottom: 10px;
+        }
+        .card-text {
+          font-size: 2rem;
+          text-align: center;
+          margin: 0;
+        }
+        .form-group {
+          margin-bottom: 20px;
+        }
+        label {
+          font-weight: bold;
+        }
+        select,
+        input[type="date"],
+        input[type="month"],
+        input[type="number"] {
+          width: 100%;
+          padding: 10px;
+          border: none;
+          border-bottom: 2px solid #ccc;
+          border-radius: 0;
+          font-size: 1rem;
+          margin-bottom: 10px;
+        }
+        select:focus,
+        input[type="date"]:focus,
+        input[type="month"]:focus,
+        input[type="number"]:focus {
+          outline: none;
+          border-bottom-color: #4CAF50;
+        }
+        button[type="submit"] {
+          padding: 10px 20px;
+          border-radius: 5px;
+          background-color: #4CAF50;
+          border: none;
+          color: #fff;
+          font-size: 1.2rem;
+          cursor: pointer;
+          transition: background-color 0.2s ease-in-out;
+        }
+        button[type="submit"]:hover {
+          background-color: #3e8e41;
+        }
+    </style>
+
+<div class="container">
+  <h1 class="text-center">Statistics</h1>
+  <hr>
+  <div class="row">
+    <div class="col-md-3">
+      <div class="card border-success mb-3">
+        <div class="card-header bg-transparent border-success text-center">
+          <h5 class="card-title">Total Sales</h5>
+        </div>
+        <div class="card-body text-success">
+          <h5 class="card-text text-center">{{ total_sales }}</h5>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="card border-primary mb-3">
+        <div class="card-header bg-transparent border-primary text-center">
+          <h5 class="card-title">Total Stock</h5>
+        </div>
+        <div class="card-body text-primary">
+          <h5 class="card-text text-center">{{ total_payments }}</h5>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="card border-info mb-3">
+        <div class="card-header bg-transparent border-info text-center">
+          <h5 class="card-title">Sales Count</h5>
+        </div>
+        <div class="card-body text-info">
+          <h5 class="card-text text-center">{{ sales_count }}</h5>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="card border-warning mb-3">
+        <div class="card-header bg-transparent border-warning text-center">
+          <h5 class="card-title">Stock Count</h5>
+        </div>
+        <div class="card-body text-warning">
+          <h5 class="card-text text-center">{{ stock_count }}</h5>
+        </div>
+      </div>
+    </div>
+  </div>
+  <hr>
+  <div class="row">
+    <div class="col-md-4 offset-md-4">
+      <form method="get">
+        <div class="form-group">
+          <label for="date_filter">View by:</label>
+          <select class="form-control" name="date_filter" id="date_filter">
+            <option value="day" {% if date_filter == 'day' %}selected{% endif %}>Day</option>
+            <option value="month" {% if date_filter == 'month' %}selected{% endif %}>Month</option>
+            <option value="year" {% if date_filter == 'year' %}selected{% endif %}>Year</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="date">Date:</label>
+          <input type="date" name="date" class="form-control" value="{{ request.GET.date }}">
+        </div>
+        <div class="form-group">
+          <label for="month">Month:</label>
+          <input type="month" name="month" class="form-control" value="{{ request.GET.month }}">
+        </div>
+        <div class="form-group">
+          <label for="year">Year:</label>
+          <input type="number" name="year" class="form-control" value="{{ request.GET.year }}">
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Check</button>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}
