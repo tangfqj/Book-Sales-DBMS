@@ -66,3 +66,10 @@ _payment:_ relating User with Book through Bill
 _sell:_ relating User with Book through Bill
 
 _create_account:_ relating User(common) with User(super)
+
+## Screenshots
+![Welcome](D:\Book-Sales-DBMS\images\pic1.png)
+
+![Log in](D:\Book-Sales-DBMS\images\pic2.png)
+
+![View all books](D:\Book-Sales-DBMS\images\pic3.png)
